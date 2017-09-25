@@ -29,7 +29,6 @@ import com.opencsv.CSVReader;
 @Component
 public class AirportAppDaoImpl implements AirportAppDao {
 
-	// src\\main\\webapp\\WEB-INF\\files
 	private static final String COUNTRY_DATA = "countries.csv";
 	private static final String AIRPORT_DATA = "airports.csv";
 	private static final String RUNWAY_DATA = "runways.csv";
@@ -38,8 +37,6 @@ public class AirportAppDaoImpl implements AirportAppDao {
 	private List<Runway> runwayList = new ArrayList<>();
 	private Map<Country, Integer> sortedCountriesAirportMap = new LinkedHashMap<>();
 	private Map<Country, Integer> sortedMap = new LinkedHashMap<>();
-	private static String currentDir = Paths.get(".").toAbsolutePath().toString();
-	private static String absPath = currentDir.substring(0, currentDir.length() - 1).replace("\\", "\\\\");
 
 	public AirportAppDaoImpl() {
 		readCountryCSV();
@@ -57,8 +54,6 @@ public class AirportAppDaoImpl implements AirportAppDao {
 		CSVReader reader;
 		try {
 			reader = AirportAppDaoImpl.readFileLocation(COUNTRY_DATA);
-			// reader = new CSVReader(new FileReader(absPath + COUNTRY_DATA),
-			// ',', '\n', 1);
 			String[] record = null;
 
 			while ((record = reader.readNext()) != null) {
@@ -85,8 +80,6 @@ public class AirportAppDaoImpl implements AirportAppDao {
 
 		try {
 			reader = AirportAppDaoImpl.readFileLocation(AIRPORT_DATA);
-			// reader = new CSVReader(new FileReader(absPath + AIRPORT_DATA),
-			// ',', '\n', 1);
 			String[] record = null;
 			while ((record = reader.readNext()) != null) {
 				Airport airport = new Airport();
@@ -120,11 +113,8 @@ public class AirportAppDaoImpl implements AirportAppDao {
 	@Override
 	public void readRunwayCSV() {
 		CSVReader reader;
-		// List<Runway> runwayList = new ArrayList<>();
 		try {
 			reader = AirportAppDaoImpl.readFileLocation(RUNWAY_DATA);
-			// reader = new CSVReader(new FileReader(absPath + RUNWAY_DATA),
-			// ',', '\n', 1);
 			String[] record = null;
 			while ((record = reader.readNext()) != null) {
 				Runway runway = new Runway();
@@ -159,7 +149,6 @@ public class AirportAppDaoImpl implements AirportAppDao {
 
 	@Override
 	public List<CountryAirportResults> getAirportsRunwaysOnCode(String countryCode) {
-		// List<Airport> countryAirports = new ArrayList<Airport>();
 		List<CountryAirportResults> finalResults = new ArrayList<>();
 		List<Runway> runwayResults = null;
 		CountryAirportResults countryAirportResult = null;
@@ -231,9 +220,6 @@ public class AirportAppDaoImpl implements AirportAppDao {
 		// .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
 		// (oldValue, newValue) -> oldValue, LinkedHashMap::new));
 		apCount.entrySet().stream().sorted(Map.Entry.<Country, Integer>comparingByValue().reversed()).limit(10).forEachOrdered(x -> sortedMap.put(x.getKey(), x.getValue()));
-		// System.out.println(System.lineSeparator());
-		// sortedMap.entrySet().stream().forEach(k ->
-		// System.out.println(k.getKey().getName() + ": " + k.getValue()));
 
 		return sortedMap;
 	}
