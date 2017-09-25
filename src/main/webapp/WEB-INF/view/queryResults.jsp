@@ -1,6 +1,6 @@
 <%@include file="common/header.jspf" %>
 	<div  class="container-fluid">	
-	<h1> Airports and Runway based on Country : </h1>
+	<h1>Airports and Runway based on Country Search: ${searchTxt} </h1>
 		
 	 	<c:forEach items="${queryOutput}" var="var">
 	 	 <h3>AIRPORT (${var.airport.name})</h3>

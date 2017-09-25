@@ -46,15 +46,16 @@ public class AirportMVCController {
 
 	@RequestMapping(value = "searchcode")
 	public String searchCode(ModelMap model, HttpServletRequest request) {
-		String countryCode = request.getParameter("searchCodeText");
-		countryCode = countryCode.toUpperCase();
-		if (countryCode.isEmpty()) {
+		String searchTxt = request.getParameter("searchCodeText");
+		searchTxt = searchTxt.toUpperCase();
+		if (searchTxt.isEmpty()) {
 			return "userSerachQuery";
 		}
-		List<CountryAirportResults> queryOutput = airportService.getAirportsRunwaysOnCode(countryCode);
+		List<CountryAirportResults> queryOutput = airportService.getAirportsRunwaysOnCode(searchTxt);
 		if (queryOutput.isEmpty()) {
 			return "error";
 		}
+		model.addAttribute("searchTxt", searchTxt);
 		model.addAttribute("queryOutput", queryOutput);
 		return "queryResults";
 
@@ -71,6 +72,7 @@ public class AirportMVCController {
 		if (queryOutput.isEmpty()) {
 			return "error";
 		}
+		model.addAttribute("searchTxt", searchTxt);
 		model.addAttribute("queryOutput", queryOutput);
 		return "queryResults";
 
