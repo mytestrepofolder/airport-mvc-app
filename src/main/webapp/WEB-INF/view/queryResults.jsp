@@ -1,5 +1,5 @@
 <%@include file="common/header.jspf" %>
-	<div  class="container">	
+	<div  class="container-fluid">	
 	<h1> Airports and Runway based on Country : </h1>
 		
 	 	<c:forEach items="${queryOutput}" var="var">
