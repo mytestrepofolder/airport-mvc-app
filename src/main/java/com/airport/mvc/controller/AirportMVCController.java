@@ -15,7 +15,10 @@ import com.airport.mvc.entity.Country;
 import com.airport.mvc.entity.results.AirportRunwayTypeResults;
 import com.airport.mvc.entity.results.CountryAirportResults;
 import com.airport.mvc.service.AirportAppService;
-
+/**
+ * @author Plabon.Kakoti
+ *
+ */
 @Controller
 public class AirportMVCController {
 
@@ -27,7 +30,7 @@ public class AirportMVCController {
 		return "airportDetails";
 	}
 
-	@RequestMapping(value = "search")
+	@RequestMapping(value = "search", method = RequestMethod.GET)
 	public String userSearchQuery(ModelMap model) {
 		return "userSerachQuery";
 	}
@@ -44,7 +47,7 @@ public class AirportMVCController {
 		return "reportsView";
 	}
 
-	@RequestMapping(value = "searchcode")
+	@RequestMapping(value = "searchcode", method = RequestMethod.GET)
 	public String searchCode(ModelMap model, HttpServletRequest request) {
 		String searchTxt = request.getParameter("searchCodeText");
 		searchTxt = searchTxt.toUpperCase();
@@ -61,7 +64,7 @@ public class AirportMVCController {
 
 	}
 
-	@RequestMapping(value = "searchname")
+	@RequestMapping(value = "searchname", method = RequestMethod.GET)
 	public String searchName(ModelMap model, HttpServletRequest request) {
 		String searchTxt = request.getParameter("searchNameText");
 		if (searchTxt.isEmpty()) {
